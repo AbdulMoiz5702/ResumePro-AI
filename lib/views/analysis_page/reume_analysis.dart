@@ -4,15 +4,13 @@ import 'package:get/get.dart';
 import '../../controller/analyzise_resuma.dart';
 import '../../conts/colors.dart';
 import '../../widgets/text_widgets.dart';
-
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class ATSAnalysisPage extends StatefulWidget {
   final File cvFile;
   final String role;
-  const ATSAnalysisPage({Key? key, required this.cvFile, required this.role}) : super(key: key);
+  final String jobDescription ;
+  const ATSAnalysisPage({Key? key, required this.cvFile, required this.role,required this.jobDescription}) : super(key: key);
 
   @override
   _ATSAnalysisPageState createState() => _ATSAnalysisPageState();

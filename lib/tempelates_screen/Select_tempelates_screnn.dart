@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../controller/templeates_categories.dart';
 import '../conts/colors.dart';
 import '../conts/const_strings.dart';
+import '../views/cover_letter/cover_letter.dart';
 import '../widgets/text_widgets.dart';
 
 
@@ -14,6 +15,13 @@ class SelectTempelatesScrenn extends StatelessWidget {
   Widget build(BuildContext context) {
     var controller = Get.put(TempleatesCategoriesController());
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black,
+        child: Icon(Icons.edit, color: Colors.white),
+        onPressed: () {
+          Get.to(() => CoverLetterScreen());
+        },
+      ),
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: blackColor,

@@ -23,3 +23,7 @@ var modern =[
   templateFive,
   templateSix,
 ];
+
+var classic =[
+  classicTemplateOne,
+];

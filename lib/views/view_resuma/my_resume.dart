@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:pro/widgets/ResumeOptionsBottomSheet.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../controller/cv_controller.dart';
@@ -61,7 +62,7 @@ class MyResumePage extends StatelessWidget {
         backgroundColor: blackColor,
         automaticallyImplyLeading: false,
         title: Row(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             DropdownButton<String>(
               dropdownColor: blackColor,
@@ -76,29 +77,17 @@ class MyResumePage extends StatelessWidget {
                 );
               }).toList(),
             ),
-            IconButton(
-              icon: const Icon(Icons.color_lens, color: whiteColor),
-              onPressed: () => _showColorPicker(context),
-            ),
+            IconButton(onPressed: (){
+              showModalBottomSheet(
+                isScrollControlled: true,
+                  context: context, builder: (context){
+                return ResumeOptionsBottomSheet(fontController: fontController, screenshotController: screenshotController, userModel: userModel);
+              });
+            }, icon: Icon(Icons.widgets_outlined))
           ],
         ),
         centerTitle: true,
         actions: [
-          IconButton(
-            icon: const Icon(Icons.picture_as_pdf, color: whiteColor),
-            onPressed: () => _exportToPDF(context),
-          ),
-          IconButton(
-            icon: const Icon(Icons.share, color: whiteColor),
-            onPressed: () => _sharePDF(context),
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.analytics,
-              color: whiteColor,
-            ),
-            onPressed: () => _analyzeCV(context, userModel.currentPosition),
-          ),
         ],
       ),
       body: Screenshot(
@@ -166,108 +155,6 @@ class MyResumePage extends StatelessWidget {
   }
 
 
-  void _showColorPicker(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Pick Colors'),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text('Text Color:'),
-                ColorPicker(
-                  pickerColor: fontController.textColor.value,
-                  onColorChanged: (color) =>
-                      fontController.changeTextColor(color),
-                ),
-                const SizedBox(height: 16),
-                const Text('Background Color:'),
-                ColorPicker(
-                  pickerColor: fontController.backgroundColor.value,
-                  onColorChanged: (color) =>
-                      fontController.changeBackgroundColor(color),
-                ),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-              child: const Text('Close'),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _exportToPDF(context) async {
-    final image = await screenshotController.capture();
-    if (image != null) {
-      final pdf = pw.Document();
-      final pdfWidth = MediaQuery.of(context).size.width;
-      final pdfHeight = MediaQuery.of(context).size.height;
-      // Custom page size to match the screen dimensions
-      pdf.addPage(
-        pw.Page(
-          pageFormat:
-              PdfPageFormat(pdfWidth, pdfHeight), // Use device screen size
-          build: (context) => pw.Center(
-            child: pw.Image(pw.MemoryImage(image)),
-          ),
-        ),
-      );
-
-      await Printing.layoutPdf(
-        onLayout: (PdfPageFormat format) async {
-          return pdf.save();
-        },
-      );
-    }
-  }
-
-  void _sharePDF(context) async {
-    final Uint8List? image = await screenshotController.capture();
-    if (image != null) {
-      final pdf = pw.Document();
-      final pdfWidth = MediaQuery.of(context).size.width;
-      final pdfHeight = MediaQuery.of(context).size.height;
-
-      pdf.addPage(
-        pw.Page(
-          pageFormat:
-              PdfPageFormat(pdfWidth, pdfHeight), // Use device screen size
-          build: (context) => pw.Center(
-            child: pw.Image(pw.MemoryImage(image)),
-          ),
-        ),
-      );
-
-      final pdfData = await pdf.save();
-      final tempDir = await getTemporaryDirectory(); // Use temporary directory
-      final filePath = '${tempDir.path}/resume.pdf';
-      final file = File(filePath);
-      await file.writeAsBytes(pdfData);
-
-      // ✅ Convert File to XFile before sharing
-      final xFile = XFile(file.path);
-      await Share.shareXFiles([xFile], text: 'Check out my CV!');
-    }
-  }
-
-  // 🚀 Capture Screenshot and Navigate to ATS Analysis
-  void _analyzeCV(BuildContext context, role) async {
-    final image = await screenshotController.capture();
-    if (image != null) {
-      final tempDir = await getTemporaryDirectory();
-      final filePath = '${tempDir.path}/resume.png';
-      final file = File(filePath);
-      await file.writeAsBytes(image);
-      Get.to(() => ATSAnalysisPage(cvFile: file, role: role));
-    }
-  }
 }
 
 

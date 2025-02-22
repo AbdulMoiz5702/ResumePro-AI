@@ -29,3 +29,19 @@ Widget buildSkillsSection({required context ,required skills,required Color colo
     }),
   );
 }
+
+
+Widget classicSkillsSection({required context ,required skills,required Color color,required TextStyle style }) {
+  if (skills == null || skills!.isEmpty) {
+    return const Sized();
+  }
+  return Wrap(
+    crossAxisAlignment: WrapCrossAlignment.start,
+    direction: Axis.horizontal, // Ensures horizontal wrapping
+    spacing: MediaQuery.sizeOf(context).height * 0.1, // Adds spacing between items
+    children: List.generate(skills!.length,(index){
+      var data = skills![index];
+      return Text(data.skill, style: style);
+    }),
+  );
+}

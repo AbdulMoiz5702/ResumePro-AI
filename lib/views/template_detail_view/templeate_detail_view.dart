@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pro/tempelates_screen/classic_all_templates/classis_tempelates_one.dart';
 import 'package:pro/tempelates_screen/modren_all_templates/modren_templeates_six.dart';
 import '../../conts/colors.dart';
 import '../../conts/dummy_data.dart';
@@ -144,7 +145,16 @@ class TemplateDetailView extends StatelessWidget {
   List<Widget> _getClassicTemplateWidgets(int index) {
     switch (index) {
       case 0:
-        return [Text("Classic Template 0")]; // Replace with your widget
+        return [
+          ClassisTempelatesOne(
+            userModel: userModel,
+            education: education,
+            experienceList: experienceList,
+            language: language,
+            skills: skills,
+            certificated: certificated,
+          )
+        ]; // Replace with your widget
       case 1:
         return [Text("Classic Template 1")]; // Replace with your widget
       default:

@@ -41,10 +41,12 @@ class ModrenTempelatesSix extends StatelessWidget {
   final FontController fontController = Get.put(FontController());
   @override
   Widget build(BuildContext context) {
+    fontController.backgroundColor.value = greenColor;
+    fontController.textColor.value = whiteColor;
     return Obx(
           ()=> SingleChildScrollView(
         child: Container(
-          color: fontController.backgroundColor.value,
+          color: whiteColor,
           child: Column(
             children: [
               Row(
@@ -80,7 +82,7 @@ class ModrenTempelatesSix extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: whiteColor,
                             ),
-                            child: buildSectionTitle('Education'.toUpperCase(),'Barlow',false,buildSectionTitle: true)),
+                            child: buildSectionTitle('Education'.toUpperCase(),'Barlow',isViewScreen == true ? false :true,buildSectionTitle: true)),
                         buildEducationSection(context: context,education: education,styleSchoolLevel: _getTextStyle(13,'Poppins',false,false,FontWeight.bold),styleSchoolName:  _getTextStyle(11,'Poppins',false,false,FontWeight.bold),stylePtudyPeriod:  _getTextStyle(11,'Poppins',false,false)),
                         const Sized(height: 0.04,),
                         Container(
@@ -89,7 +91,7 @@ class ModrenTempelatesSix extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: whiteColor,
                             ),
-                            child: buildSectionTitle('Skills'.toUpperCase(),'Barlow',false,buildSectionTitle: true)),
+                            child: buildSectionTitle('Skills'.toUpperCase(),'Barlow',isViewScreen == true ? false:true,buildSectionTitle: true)),
                         buildSkillsSection(context: context,color:isViewScreen == true ? whiteColor: fontController.textColor.value,style: _getTextStyle(11,'Poppins',false,false), skills: skills),
                         const Sized(height: 0.04,),
                         Container(
@@ -98,7 +100,7 @@ class ModrenTempelatesSix extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: whiteColor,
                             ),
-                            child: buildSectionTitle('Certificates'.toUpperCase(),'Barlow',false,buildSectionTitle: true)),
+                            child: buildSectionTitle('Certificates'.toUpperCase(),'Barlow',isViewScreen == true ? false:true,buildSectionTitle: true)),
                         buildCertificatedSection(context: context,color:isViewScreen == true ? whiteColor : fontController.textColor.value,style: _getTextStyle(11,'Poppins',false,false), certificated: certificated),
                         const Sized(height: 0.03,),
                       ],

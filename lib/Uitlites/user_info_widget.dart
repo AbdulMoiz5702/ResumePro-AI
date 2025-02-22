@@ -159,3 +159,40 @@ Widget buildPersonalInfoModernTwo(
     ],
   );
 }
+
+
+Widget classicPersonalInfo(
+    {required context,
+      required userModel,
+      required TextStyle fullNameStyle,
+      required TextStyle currentPositionStyle,
+      required Color color,
+      required TextStyle userDataStyle}) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(userModel.fullName, style: fullNameStyle),
+      if (userModel.currentPosition != null)
+        const Sized(
+          height: 0.005,
+        ),
+      Text(userModel.currentPosition!, style: currentPositionStyle),
+      if (userModel.email != null)
+        const Sized(
+          height: 0.003,
+        ),
+      Row(
+        children: [
+          if (userModel.email != null)
+          Text(userModel.email!, style: userDataStyle),
+          Sized(width: 0.02,),
+          if (userModel.phoneNumber != null)
+          Text(userModel.phoneNumber!, style: userDataStyle),
+          Sized(width: 0.02,),
+          if (userModel.address != null)
+            Text(userModel.address!, style: userDataStyle)
+        ],
+      ),
+    ],
+  );
+}

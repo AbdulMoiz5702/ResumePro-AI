@@ -30,4 +30,19 @@ Widget buildCertificatedSection({required context ,required certificated,require
   );
 }
 
+Widget classicCertificatedSection({required context ,required certificated,required Color color,required TextStyle style }) {
+  if (certificated == null || certificated!.isEmpty) {
+    return const Sized();
+  }
+  return Wrap(
+    crossAxisAlignment: WrapCrossAlignment.start,
+    direction: Axis.horizontal, // Ensures horizontal wrapping
+    spacing: MediaQuery.sizeOf(context).height * 0.01, // Adds spacing between items
+    children: List.generate(certificated!.length,(index){
+      var data = certificated![index];
+      return Text(data.certificated, style:style );
+    }),
+  );
+}
+
 
