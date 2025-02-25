@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pro/tempelates_screen/classic_all_templates/classis_tempelates_Four.dart';
+import 'package:pro/tempelates_screen/classic_all_templates/classis_tempelates_Three.dart';
 import 'package:pro/tempelates_screen/classic_all_templates/classis_tempelates_one.dart';
 import 'package:pro/tempelates_screen/modren_all_templates/modren_templeates_six.dart';
 import '../../conts/colors.dart';
 import '../../conts/dummy_data.dart';
+import '../../tempelates_screen/classic_all_templates/classis_tempelates_Five.dart';
+import '../../tempelates_screen/classic_all_templates/classis_tempelates_Six.dart';
+import '../../tempelates_screen/classic_all_templates/classis_tempelates_two.dart';
 import '../../tempelates_screen/modren_all_templates/modren_tempelate_one.dart';
 import '../../tempelates_screen/modren_all_templates/modren_tempelates_three.dart';
 import '../../tempelates_screen/modren_all_templates/modren_tempelates_two.dart';
@@ -84,7 +89,6 @@ class TemplateDetailView extends StatelessWidget {
             language: language,
             skills: skills,
             certificated: certificated,
-            isViewScreen: true,
           )
         ];
       case 2:
@@ -96,7 +100,6 @@ class TemplateDetailView extends StatelessWidget {
             language: language,
             skills: skills,
             certificated: certificated,
-            isViewScreen: true,
           )
         ];
       case 3:
@@ -108,7 +111,6 @@ class TemplateDetailView extends StatelessWidget {
             language: language,
             skills: skills,
             certificated: certificated,
-            isViewScreen: true,
           )
         ];
       case 4:
@@ -120,7 +122,6 @@ class TemplateDetailView extends StatelessWidget {
             language: language,
             skills: skills,
             certificated: certificated,
-            isViewScreen: true,
           )
         ];
       case 5:
@@ -132,7 +133,6 @@ class TemplateDetailView extends StatelessWidget {
             language: language,
             skills: skills,
             certificated: certificated,
-            isViewScreen: true,
           )
         ];
       default:
@@ -156,7 +156,60 @@ class TemplateDetailView extends StatelessWidget {
           )
         ]; // Replace with your widget
       case 1:
-        return [Text("Classic Template 1")]; // Replace with your widget
+        return [
+          ClassisTempelatesTwo(
+          userModel: userModel,
+          education: education,
+          experienceList: experienceList,
+          language: language,
+          skills: skills,
+          certificated: certificated,
+        )
+        ];
+      case 2:
+        return [
+          ClassisTempelatesThree(
+            userModel: userModel,
+            education: education,
+            experienceList: experienceList,
+            language: language,
+            skills: skills,
+            certificated: certificated,
+          )
+        ];
+      case 3:
+        return [
+          ClassisTempelatesFour(
+            userModel: userModel,
+            education: education,
+            experienceList: experienceList,
+            language: language,
+            skills: skills,
+            certificated: certificated,
+          )
+        ];
+      case 4:
+        return [
+          ClassisTempelatesFive(
+            userModel: userModel,
+            education: education,
+            experienceList: experienceList,
+            language: language,
+            skills: skills,
+            certificated: certificated,
+          )
+        ];
+      case 5:
+        return [
+          ClassisTempelatesSix(
+            userModel: userModel,
+            education: education,
+            experienceList: experienceList,
+            language: language,
+            skills: skills,
+            certificated: certificated,
+          )
+        ];
       default:
         return [Text("No matching classic template")]; // Handle invalid indexes
     }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pro/conts/colors.dart';
 import '../../Uitlites/certificates_widgte.dart';
 import '../../Uitlites/exerience_widgets.dart';
 import '../../Uitlites/language_widget.dart';
@@ -40,7 +41,7 @@ class ModrenTempelateOne extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
         ()=> Container(
-          color: fontController.backgroundColor.value,
+          color: fontController.isDefault.value == true ? whiteColor :fontController.backgroundColor.value,
           child: SingleChildScrollView(
           child: Column(
             children: [
@@ -53,17 +54,17 @@ class ModrenTempelateOne extends StatelessWidget {
                     Container(
                       height: MediaQuery.sizeOf(context).height * 0.17,
                       width: MediaQuery.sizeOf(context).width * 0.28,
-                      decoration: const BoxDecoration(
-                        color: Colors.black,
+                      decoration:  BoxDecoration(
+                        color: fontController.isDefault.value == true ? blackColor :fontController.textColor.value,
                         shape: BoxShape.circle,
                       ),
                     ),
-                    buildPersonalInfo(context: context,userModel: userModel,fullNameStyle: _getTextStyle(20, FontWeight.bold,),currentPositionStyle: _getTextStyle(16,FontWeight.w700),color: fontController.textColor.value,userDataStyle: _getTextStyle(12)),
+                    buildPersonalInfo(context: context,userModel: userModel,fullNameStyle: _getTextStyle(size: 20,weight: FontWeight.bold,color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value ),currentPositionStyle: _getTextStyle(size: 16,weight:  FontWeight.w700,color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value),color: fontController.isDefault.value == true ? blackColor :fontController.textColor.value,userDataStyle: _getTextStyle(size:  12,color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value,),),
                   ],
                 ),
               ),
               const Sized(height: 0.01,),
-              CustomDivider(isHorizontal: true,color: fontController.textColor.value),
+              CustomDivider(isHorizontal: true,color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value),
               const Sized(height: 0.05,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -75,18 +76,18 @@ class ModrenTempelateOne extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        buildSectionTitle('Education'),
-                        buildEducationSection(context: context,education: education,styleSchoolLevel: _getTextStyle(13, FontWeight.bold),styleSchoolName:  _getTextStyle(11,FontWeight.bold),stylePtudyPeriod:  _getTextStyle(11,)),
+                        buildSectionTitle(title: 'Education',color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value),
+                        buildEducationSection(context: context,education: education,styleSchoolLevel: _getTextStyle(size:  13,weight:  FontWeight.bold,color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value),styleSchoolName:  _getTextStyle(size: 11,weight:  FontWeight.bold,color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value),stylePtudyPeriod:  _getTextStyle(size:  11,color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value)),
                         const Sized(height: 0.025,),
-                        buildSectionTitle('Skills'),
-                        buildSkillsSection(context: context,color: fontController.textColor.value,style: _getTextStyle(11), skills: skills),
+                        buildSectionTitle(title: 'Skills',color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value),
+                        buildSkillsSection(context: context,color: fontController.textColor.value,style: _getTextStyle(size:  11,color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value), skills: skills),
                         const Sized(height: 0.025,),
-                        buildSectionTitle('Certificates'),
-                        buildCertificatedSection(context: context,color: fontController.textColor.value,style: _getTextStyle(11), certificated: certificated),
+                        buildSectionTitle(title: 'Certificates',color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value),
+                        buildCertificatedSection(context: context,color: fontController.textColor.value,style: _getTextStyle(size: 11,color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value), certificated: certificated),
                       ],
                     ),
                   ),
-                  CustomDivider(isHorizontal: false,color: fontController.textColor.value,),
+                  CustomDivider(isHorizontal: false,color: fontController.isDefault.value == true ? blackColor :fontController.textColor.value,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5.0),
                     child: Column(
@@ -97,12 +98,12 @@ class ModrenTempelateOne extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              buildSectionTitle('Profile'),
+                              buildSectionTitle(title: 'Profile',color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value),
                               SizedBox(
                                 width: MediaQuery.sizeOf(context).width * 0.55,
                                 child: Text(
                                   userModel.bio!,
-                                  style: _getTextStyle(10),
+                                  style: _getTextStyle(size: 10,color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value),
                                   softWrap: true,
                                   overflow: TextOverflow.visible, // Allow all content to be visible
                                   maxLines: 10,
@@ -111,11 +112,11 @@ class ModrenTempelateOne extends StatelessWidget {
                             ],
                           ),
                         const Sized(height: 0.025,),
-                        buildSectionTitle('Experience'),
-                        buildExperienceSection(context: context,experienceTitle: _getTextStyle(12, FontWeight.bold),experiencePeriod: _getTextStyle(8, FontWeight.w500),experiencePlace: _getTextStyle(12,FontWeight.bold),description: _getTextStyle(10),experienceList: experienceList,),
+                        buildSectionTitle(title: 'Experience',color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value),
+                        buildExperienceSection(context: context,experienceTitle: _getTextStyle(size:  12,weight:  FontWeight.bold,color:fontController.isDefault.value == true ? blackColor :fontController.backgroundColor.value),experiencePeriod: _getTextStyle(size:  8,weight:  FontWeight.w500,color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value),experiencePlace: _getTextStyle(size:  12,weight:  FontWeight.bold,color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value),description: _getTextStyle(size: 10,color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value),experienceList: experienceList,),
                         const Sized(height: 0.025,),
-                        buildSectionTitle('Languages'),
-                        buildLanguageSection(context: context,color: fontController.textColor.value,style: _getTextStyle(11), language: language),
+                        buildSectionTitle(title: 'Languages',color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value),
+                        buildLanguageSection(context: context,color: fontController.textColor.value,style: _getTextStyle(size: 11,color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value), language: language),
                       ],
                     ),
                   ),
@@ -127,16 +128,23 @@ class ModrenTempelateOne extends StatelessWidget {
         ),
     );
   }
-  TextStyle _getTextStyle(double size, [FontWeight weight = FontWeight.normal]) {
+
+  /// Generates text styles dynamically
+  TextStyle _getTextStyle({required double size,FontWeight weight = FontWeight.normal,required Color color}) {
     return GoogleFonts.getFont(
+      decorationThickness: 3.0,
       fontController.selectedFont.value,
       fontSize: size,
       fontWeight: weight,
-      color: fontController.textColor.value,
+      color: color,
     );
   }
 
-  Widget buildSectionTitle(String title) {
-    return Text(title, style: _getTextStyle(18, FontWeight.bold));
+  /// Section Title Widget with optional color parameter
+  Widget buildSectionTitle({required String title,required Color color}) {
+    return Text(
+      title,
+      style: _getTextStyle(size: 18,weight: FontWeight.bold,color: color),
+    );
   }
 }

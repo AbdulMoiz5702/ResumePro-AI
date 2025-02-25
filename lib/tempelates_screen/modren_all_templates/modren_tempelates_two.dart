@@ -9,6 +9,7 @@ import '../../Uitlites/skills_widget.dart';
 import '../../Uitlites/study_widget.dart';
 import '../../Uitlites/user_info_widget.dart';
 import '../../controller/cv_controller.dart';
+import '../../conts/colors.dart';
 import '../../models/certificated.dart';
 import '../../models/eduaction_model.dart';
 import '../../models/exprience_model.dart';
@@ -25,7 +26,6 @@ class ModrenTempelatesTwo extends StatelessWidget {
   final List<SkillsModel>? skills;
   final List<Certificated>? certificated;
   final UserModel userModel;
-  final bool isViewScreen ;
 
   ModrenTempelatesTwo({
     super.key,
@@ -35,15 +35,14 @@ class ModrenTempelatesTwo extends StatelessWidget {
     this.language,
     this.skills,
     this.certificated,
-    required this.isViewScreen ,
   });
 
   final FontController fontController = Get.put(FontController());
   @override
   Widget build(BuildContext context) {
     return Obx(
-          ()=> Container(
-        color: fontController.backgroundColor.value,
+      () => Container(
+        color: fontController.isDefault.value == true ? whiteColor :fontController.backgroundColor.value,
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -58,41 +57,89 @@ class ModrenTempelatesTwo extends StatelessWidget {
                       clipBehavior: Clip.hardEdge,
                       height: MediaQuery.sizeOf(context).height * 0.17,
                       width: MediaQuery.sizeOf(context).width * 0.28,
-                      decoration:  BoxDecoration(
+                      decoration: BoxDecoration(
                         color: Colors.white,
-                        border: Border.all(color:isViewScreen == true ? Color(0xff6c9ac3) : fontController.textColor.value,width:3,style: BorderStyle.solid,strokeAlign: BorderSide.strokeAlignOutside),
+                        border: Border.all(
+                            color: fontController.isDefault.value == true ? Color(0xff6c9ac3) :fontController.textColor.value ,
+                            width: 3,
+                            style: BorderStyle.solid,
+                            strokeAlign: BorderSide.strokeAlignOutside),
                         shape: BoxShape.circle,
                       ),
-                      child: Image(image: AssetImage(dummyPicture),fit: BoxFit.contain,isAntiAlias: true,),
+                      child: Image(
+                        image: AssetImage(dummyPicture),
+                        fit: BoxFit.contain,
+                        isAntiAlias: true,
+                      ),
                     ),
-                    Sized(width: 0.01,),
-                    buildPersonalInfoModernTwo(context: context,userModel: userModel,fullNameStyle: _getTextStyle(20,'Poppins',FontWeight.bold,),currentPositionStyle: _getTextStyle(16,'Poppins',FontWeight.w700),color: fontController.textColor.value,userDataStyle: _getTextStyle(8,'Poppins')),
+                    Sized(
+                      width: 0.01,
+                    ),
+                    buildPersonalInfoModernTwo(
+                        context: context,
+                        userModel: userModel,
+                        fullNameStyle: _getTextStyle(
+                         size:  20,
+                         weight:  FontWeight.bold,
+                         color: fontController.isDefault.value == true ? blackColor:fontController.textColor.value
+                        ),
+                        currentPositionStyle:
+                            _getTextStyle(size: 16, weight:  FontWeight.w700,color :fontController.isDefault.value == true ? blackColor:fontController.textColor.value ),
+                        color:fontController.isDefault.value == true ? blackColor: fontController.textColor.value,
+                        userDataStyle: _getTextStyle(size: 8,color: fontController.isDefault.value == true ? blackColor:fontController.textColor.value )),
                   ],
                 ),
               ),
-              const Sized(height: 0.03,),
+              const Sized(
+                height: 0.03,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding:  EdgeInsets.only(left: MediaQuery.sizeOf(context).width * 0.04,right:MediaQuery.sizeOf(context).width * 0.01, ),
+                    padding: EdgeInsets.only(
+                      left: MediaQuery.sizeOf(context).width * 0.04,
+                      right: MediaQuery.sizeOf(context).width * 0.01,
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        buildSectionTitle('Education'.toUpperCase(),'Barlow'),
-                        buildEducationSection(context: context,education: education,styleSchoolLevel: _getTextStyle(13,'Poppins',FontWeight.bold),styleSchoolName:  _getTextStyle(11,'Poppins',FontWeight.bold),stylePtudyPeriod:  _getTextStyle(11,'Poppins')),
-                        const Sized(height: 0.033,),
-                        buildSectionTitle('Skills'.toUpperCase(),'Barlow'),
-                        buildSkillsSection(context: context,color:isViewScreen == true ? Color(0xff6c9ac3): fontController.textColor.value,style: _getTextStyle(11,'Poppins'), skills: skills),
-                        const Sized(height: 0.033,),
-                        buildSectionTitle('Certificates'.toUpperCase(),'Barlow'),
-                        buildCertificatedSection(context: context,color:isViewScreen == true ? Color(0xff6c9ac3): fontController.textColor.value,style: _getTextStyle(11,'Poppins'), certificated: certificated),
+                        buildSectionTitle(title:'Education'.toUpperCase(),color: fontController.isDefault.value == true ? blackColor:fontController.textColor.value ),
+                        buildEducationSection(
+                            context: context,
+                            education: education,
+                            styleSchoolLevel:
+                                _getTextStyle(size:  13,weight:  FontWeight.bold,color: fontController.isDefault.value == true ? blackColor:fontController.textColor.value ),
+                            styleSchoolName:
+                                _getTextStyle(size:  11,weight:  FontWeight.bold,color:fontController.isDefault.value == true ? blackColor:fontController.textColor.value ),
+                            stylePtudyPeriod: _getTextStyle(size:  11,color: fontController.isDefault.value == true ? blackColor:fontController.textColor.value )),
+                        const Sized(
+                          height: 0.033,
+                        ),
+                        buildSectionTitle(title: 'Skills'.toUpperCase(),color: fontController.isDefault.value == true ? blackColor:fontController.textColor.value ),
+                        buildSkillsSection(
+                            context: context,
+                            color: fontController.isDefault.value == true ? Color(0xff6c9ac3):fontController.textColor.value,
+                            style: _getTextStyle(size:  11, color: fontController.isDefault.value == true ? blackColor:fontController.textColor.value),
+                            skills: skills),
+                        const Sized(
+                          height: 0.033,
+                        ),
+                        buildSectionTitle(title: 'Certificates'.toUpperCase(),color: fontController.isDefault.value == true ? blackColor:fontController.textColor.value),
+                        buildCertificatedSection(
+                            context: context,
+                            color:fontController.isDefault.value == true ?  Color(0xff6c9ac3):fontController.textColor.value,
+                            style: _getTextStyle(size:  11,color: fontController.isDefault.value == true ?  blackColor:fontController.textColor.value),
+                            certificated: certificated),
                       ],
                     ),
                   ),
-                  CustomDivider(isHorizontal: false,color:isViewScreen == true ? Color(0xff6c9ac3): fontController.textColor.value,),
+                  CustomDivider(
+                    isHorizontal: false,
+                    color: fontController.isDefault.value == true ?  Color(0xff6c9ac3):fontController.textColor.value,
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5.0),
                     child: Column(
@@ -103,25 +150,47 @@ class ModrenTempelatesTwo extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              buildSectionTitle('ABOUT ME','Barlow'),
+                              buildSectionTitle(title: 'ABOUT ME',color: fontController.isDefault.value == true ?  blackColor:fontController.textColor.value),
                               SizedBox(
                                 width: MediaQuery.sizeOf(context).width * 0.55,
                                 child: Text(
                                   userModel.bio!,
-                                  style: _getTextStyle(10,'Poppins'),
+                                  style: _getTextStyle(size:  10, color: fontController.isDefault.value == true ?  blackColor:fontController.textColor.value),
                                   softWrap: true,
-                                  overflow: TextOverflow.visible, // Allow all content to be visible
+                                  overflow: TextOverflow
+                                      .visible, // Allow all content to be visible
                                   maxLines: 10,
                                 ),
                               ),
                             ],
                           ),
-                        const Sized(height: 0.033,),
-                        buildSectionTitle('Experience'.toUpperCase(),'Barlow'),
-                        buildExperienceSection(context: context,experienceTitle: _getTextStyle(12,'Poppins',FontWeight.bold),experiencePeriod: _getTextStyle(8,'Poppins',FontWeight.w500),experiencePlace: _getTextStyle(12,'Poppins',FontWeight.bold),description: _getTextStyle(10,'Poppins',),experienceList: experienceList,),
-                        const Sized(height: 0.033,),
-                        buildSectionTitle('Languages'.toUpperCase(),'Barlow'),
-                        buildLanguageSection(context: context,color: isViewScreen == true ? Color(0xff6c9ac3):fontController.textColor.value,style: _getTextStyle(11,'Poppins'), language: language),
+                        const Sized(
+                          height: 0.033,
+                        ),
+                        buildSectionTitle(title: 'Experience'.toUpperCase(),color: fontController.isDefault.value == true ?  blackColor:fontController.textColor.value),
+                        buildExperienceSection(
+                          context: context,
+                          experienceTitle:
+                              _getTextStyle(size: 12,weight:  FontWeight.bold,color: fontController.isDefault.value == true ?  blackColor:fontController.textColor.value),
+                          experiencePeriod:
+                              _getTextStyle(size:  8,weight:  FontWeight.w500,color: fontController.isDefault.value == true ?  blackColor:fontController.textColor.value),
+                          experiencePlace:
+                              _getTextStyle(size:  12,weight:  FontWeight.bold,color: fontController.isDefault.value == true ?  blackColor:fontController.textColor.value),
+                          description: _getTextStyle(
+                           size:  10,
+                            color: fontController.isDefault.value == true ?  blackColor:fontController.textColor.value,
+                          ),
+                          experienceList: experienceList,
+                        ),
+                        const Sized(
+                          height: 0.033,
+                        ),
+                        buildSectionTitle(title: 'Languages'.toUpperCase(),color:fontController.isDefault.value == true ?  blackColor:fontController.textColor.value),
+                        buildLanguageSection(
+                            context: context,
+                            color:  fontController.isDefault.value == true ?  Color(0xff6c9ac3):fontController.textColor.value,
+                            style: _getTextStyle(size: 11, color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value),
+                            language: language),
                       ],
                     ),
                   ),
@@ -133,16 +202,26 @@ class ModrenTempelatesTwo extends StatelessWidget {
       ),
     );
   }
-  TextStyle _getTextStyle(double size,String fontFamily,[FontWeight weight = FontWeight.normal,]) {
+
+  /// Generates text styles dynamically
+  TextStyle _getTextStyle(
+      {required double size,
+      FontWeight weight = FontWeight.normal,
+      required Color color}) {
     return GoogleFonts.getFont(
-      isViewScreen == true ? fontFamily :fontController.selectedFont.value,
+      decorationThickness: 3.0,
+      fontController.selectedFont.value,
       fontSize: size,
       fontWeight: weight,
-      color: fontController.textColor.value,
+      color: color,
     );
   }
 
-  Widget buildSectionTitle(String title,String fontFamily) {
-    return Text(title, style: _getTextStyle(18,fontFamily,FontWeight.bold,));
+  /// Section Title Widget with optional color parameter
+  Widget buildSectionTitle({required String title, required Color color}) {
+    return Text(
+      title,
+      style: _getTextStyle(size: 18, weight: FontWeight.bold, color: color),
+    );
   }
 }

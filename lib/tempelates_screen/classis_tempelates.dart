@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../conts/colors.dart';
 import '../conts/const_strings.dart';
 import '../views/template_detail_view/templeate_detail_view.dart';
 

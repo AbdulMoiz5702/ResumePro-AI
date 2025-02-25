@@ -26,4 +26,9 @@ var modern =[
 
 var classic =[
   classicTemplateOne,
+  classicTemplateTwo,
+  classicTemplateThree,
+  classicTemplateFour,
+  classicTemplateFive,
+  classicTemplateSix,
 ];

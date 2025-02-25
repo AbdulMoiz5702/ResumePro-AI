@@ -1,14 +1,9 @@
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:pro/widgets/ResumeOptionsBottomSheet.dart';
 import 'package:screenshot/screenshot.dart';
-import 'package:share_plus/share_plus.dart';
 import '../../controller/cv_controller.dart';
 import '../../conts/colors.dart';
 import '../../conts/fonts.dart';
@@ -18,9 +13,12 @@ import '../../models/eduaction_model.dart';
 import '../../models/language_model.dart';
 import '../../models/skills_model.dart';
 import '../../models/user_model.dart';
-import 'package:printing/printing.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
+import '../../tempelates_screen/classic_all_templates/classis_tempelates_Five.dart';
+import '../../tempelates_screen/classic_all_templates/classis_tempelates_Four.dart';
+import '../../tempelates_screen/classic_all_templates/classis_tempelates_Six.dart';
+import '../../tempelates_screen/classic_all_templates/classis_tempelates_Three.dart';
+import '../../tempelates_screen/classic_all_templates/classis_tempelates_one.dart';
+import '../../tempelates_screen/classic_all_templates/classis_tempelates_two.dart';
 import '../../tempelates_screen/modren_all_templates/modren_tempelate_one.dart';
 import '../../tempelates_screen/modren_all_templates/modren_tempelates_three.dart';
 import '../../tempelates_screen/modren_all_templates/modren_tempelates_two.dart';
@@ -28,7 +26,7 @@ import '../../tempelates_screen/modren_all_templates/modren_templeates_five.dart
 import '../../tempelates_screen/modren_all_templates/modren_templeates_four.dart';
 import '../../tempelates_screen/modren_all_templates/modren_templeates_six.dart';
 import '../../widgets/text_widgets.dart';
-import '../analysis_page/reume_analysis.dart';
+
 
 class MyResumePage extends StatelessWidget {
   final List<ExperienceData>? experienceList;
@@ -79,6 +77,11 @@ class MyResumePage extends StatelessWidget {
             ),
             IconButton(onPressed: (){
               showModalBottomSheet(
+                elevation: 50,
+                backgroundColor: blackColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(10),topLeft:  Radius.circular(10)),
+                ),
                 isScrollControlled: true,
                   context: context, builder: (context){
                 return ResumeOptionsBottomSheet(fontController: fontController, screenshotController: screenshotController, userModel: userModel);
@@ -93,65 +96,134 @@ class MyResumePage extends StatelessWidget {
       body: Screenshot(
         controller: screenshotController,
         child: isClassic
-            ? const Text('Non-Classic Mode')
-            : switch (index) {
-          0 =>  ModrenTempelateOne(
-            userModel: userModel,
-            education: education,
-            experienceList: experienceList,
-            language: language,
-            skills: skills,
-            certificated: certificated,
-          ),
-          1 => ModrenTempelatesTwo(
-            userModel: userModel,
-            education: education,
-            experienceList: experienceList,
-            language: language,
-            skills: skills,
-            certificated: certificated,
-            isViewScreen: false,
-          ),
-          2 => ModrenTempelatesThree(
-            userModel: userModel,
-            education: education,
-            experienceList: experienceList,
-            language: language,
-            skills: skills,
-            certificated: certificated,
-            isViewScreen: false,
-          ),
-          3 => ModrenTempelatesFour(
-            userModel: userModel,
-            education: education,
-            experienceList: experienceList,
-            language: language,
-            skills: skills,
-            certificated: certificated,
-            isViewScreen: false,
-          ),
-          4 => ModrenTempelatesFive(
-            userModel: userModel,
-            education: education,
-            experienceList: experienceList,
-            language: language,
-            skills: skills,
-            certificated: certificated,
-            isViewScreen: false,
-          ),
-          5 => ModrenTempelatesSix(
-            userModel: userModel,
-            education: education,
-            experienceList: experienceList,
-            language: language,
-            skills: skills,
-            certificated: certificated,
-            isViewScreen: false,
-          ),
-          _   => const Text('Default Screen'),
-        }
+            ? _getClassicTemplateWidgets(index)
+            : _getModernTemplateWidgets(index),
       ),
     );
+  }
+
+  _getModernTemplateWidgets(int index,) {
+    switch (index) {
+      case 0:
+        return  ModrenTempelateOne(
+          userModel: userModel,
+          education: education,
+          experienceList: experienceList,
+          language: language,
+          skills: skills,
+          certificated: certificated,
+        ); // Wrap it inside a list
+      case 1:
+        return ModrenTempelatesTwo(
+          userModel: userModel,
+          education: education,
+          experienceList: experienceList,
+          language: language,
+          skills: skills,
+          certificated: certificated,
+        );
+      case 2:
+        return ModrenTempelatesThree(
+          userModel: userModel,
+          education: education,
+          experienceList: experienceList,
+          language: language,
+          skills: skills,
+          certificated: certificated,
+        );
+      case 3:
+        return ModrenTempelatesFour(
+          userModel: userModel,
+          education: education,
+          experienceList: experienceList,
+          language: language,
+          skills: skills,
+          certificated: certificated,
+        );
+      case 4:
+        return ModrenTempelatesFive(
+          userModel: userModel,
+          education: education,
+          experienceList: experienceList,
+          language: language,
+          skills: skills,
+          certificated: certificated,
+        );
+      case 5:
+        return ModrenTempelatesSix(
+          userModel: userModel,
+          education: education,
+          experienceList: experienceList,
+          language: language,
+          skills: skills,
+          certificated: certificated,
+        );
+      default:
+        return [Text("No matching template")];
+    }
+  }
+
+
+  // Function to return widgets for classic templates
+   _getClassicTemplateWidgets(int index) {
+    switch (index) {
+      case 0:
+        return ClassisTempelatesOne(
+          userModel: userModel,
+          education: education,
+          experienceList: experienceList,
+          language: language,
+          skills: skills,
+          certificated: certificated,
+        ); // Replace with your widget
+      case 1:
+        return ClassisTempelatesTwo(
+          userModel: userModel,
+          education: education,
+          experienceList: experienceList,
+          language: language,
+          skills: skills,
+          certificated: certificated,
+        );
+      case 2:
+        return ClassisTempelatesThree(
+          userModel: userModel,
+          education: education,
+          experienceList: experienceList,
+          language: language,
+          skills: skills,
+          certificated: certificated,
+        );
+      case 3:
+        return ClassisTempelatesFour(
+          userModel: userModel,
+          education: education,
+          experienceList: experienceList,
+          language: language,
+          skills: skills,
+          certificated: certificated,
+        );
+      case 4:
+        return ClassisTempelatesFive(
+          userModel: userModel,
+          education: education,
+          experienceList: experienceList,
+          language: language,
+          skills: skills,
+          certificated: certificated,
+        );
+      case 5:
+        return ClassisTempelatesSix(
+          userModel: userModel,
+          education: education,
+          experienceList: experienceList,
+          language: language,
+          skills: skills,
+          certificated: certificated,
+        );
+      default:
+        return [Text("No matching classic template")]; // Handle invalid indexes
+    }
   }
 
 

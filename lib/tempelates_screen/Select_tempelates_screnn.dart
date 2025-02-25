@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:get/get.dart';
+import 'package:pro/views/analysis_page/ATS_Analysis_screen.dart';
 import '../controller/templeates_categories.dart';
 import '../conts/colors.dart';
 import '../conts/const_strings.dart';
@@ -15,12 +17,40 @@ class SelectTempelatesScrenn extends StatelessWidget {
   Widget build(BuildContext context) {
     var controller = Get.put(TempleatesCategoriesController());
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black,
-        child: Icon(Icons.edit, color: Colors.white),
-        onPressed: () {
-          Get.to(() => CoverLetterScreen());
-        },
+      floatingActionButtonLocation: ExpandableFab.location,
+      floatingActionButton: ExpandableFab(
+        openButtonBuilder: RotateFloatingActionButtonBuilder(
+          child: Icon(Icons.widgets), // 🔄 Dynamically change icon
+          fabSize: ExpandableFabSize.regular,
+          foregroundColor: whiteColor,
+          backgroundColor: blackColor,
+          shape: const CircleBorder(),
+        ),
+        closeButtonBuilder: DefaultFloatingActionButtonBuilder(
+          child: const Icon(Icons.close), // ❌ Close icon when expanded
+          fabSize: ExpandableFabSize.small,
+          foregroundColor: whiteColor,
+          backgroundColor: errorColor,
+          shape: const CircleBorder(),
+        ),
+        children: [
+          FloatingActionButton.small(
+            backgroundColor: blackColor,
+            heroTag: "CoverLetterScreen",
+            child: const Icon(Icons.description,color: whiteColor,),
+            onPressed: () {
+              Get.to(() => CoverLetterScreen());
+            },
+          ),
+          FloatingActionButton.small(
+            backgroundColor: blackColor,
+            heroTag: "ATSAnalysisScreen",
+            child: const Icon(Icons.analytics,color: whiteColor),
+            onPressed: () {
+              Get.to(() => ATSAnalysisScreen());
+            },
+          ),
+        ],
       ),
       appBar: AppBar(
         centerTitle: true,
@@ -34,8 +64,7 @@ class SelectTempelatesScrenn extends StatelessWidget {
             title:Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: List.generate(templateCategoryList.length, (index){
-                return InkWell(
-                  borderRadius: BorderRadius.circular(5),
+                return GestureDetector(
                   onTap: (){
                     controller.changeIndex(index: index);
                   },
@@ -52,18 +81,9 @@ class SelectTempelatesScrenn extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                         color: controller.currentIndex.value == index ? whiteColor : Colors.grey,
                       ),
-                      child: AnimatedDefaultTextStyle(
-                        duration: Duration(seconds:2),
-                        curve: Curves.easeInOut,
-                        style: TextStyle(
-                          fontSize: controller.currentIndex.value == index ? 17 : 13,
-                          fontWeight: FontWeight.w700,
-                          color: controller.currentIndex.value == index ? Colors.black : Colors.white,
-                        ),
-                        child: Text(controller.currentIndex.value == index
-                            ? "${templateCategoryList[index]} Resume" // Show "Resume" when selected
-                            : templateCategoryList[index]), // Otherwise, show normal text
-                      ),
+                      child: mediumText(title:controller.currentIndex.value == index
+                          ? "${templateCategoryList[index]} Resume" // Show "Resume" when selected
+                          : templateCategoryList[index],color: blackColor),
                     ),
                   ),
                 );

@@ -25,7 +25,6 @@ class ModrenTempelatesSix extends StatelessWidget {
   final List<SkillsModel>? skills;
   final List<Certificated>? certificated;
   final UserModel userModel;
-  final bool isViewScreen ;
 
   ModrenTempelatesSix({
     super.key,
@@ -35,18 +34,16 @@ class ModrenTempelatesSix extends StatelessWidget {
     this.language,
     this.skills,
     this.certificated,
-    required this.isViewScreen ,
   });
 
   final FontController fontController = Get.put(FontController());
   @override
   Widget build(BuildContext context) {
-    fontController.backgroundColor.value = greenColor;
-    fontController.textColor.value = whiteColor;
     return Obx(
-          ()=> SingleChildScrollView(
+      () => SingleChildScrollView(
         child: Container(
-          color: whiteColor,
+          color:
+              fontController.isDefault.value == true ? whiteColor : whiteColor,
           child: Column(
             children: [
               Row(
@@ -55,10 +52,16 @@ class ModrenTempelatesSix extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color:isViewScreen == true ? greenColor :fontController.backgroundColor.value,
-                      borderRadius: BorderRadius.only(topRight:  Radius.circular(20),bottomRight:  Radius.circular(20))
+                        color: fontController.isDefault.value == true
+                            ? greenColor
+                            : fontController.backgroundColor.value,
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(20),
+                            bottomRight: Radius.circular(20))),
+                    padding: EdgeInsets.only(
+                      left: MediaQuery.sizeOf(context).width * 0.02,
+                      right: MediaQuery.sizeOf(context).width * 0.01,
                     ),
-                    padding:  EdgeInsets.only(left: MediaQuery.sizeOf(context).width * 0.02,right:MediaQuery.sizeOf(context).width * 0.01, ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,41 +71,97 @@ class ModrenTempelatesSix extends StatelessWidget {
                           clipBehavior: Clip.hardEdge,
                           height: MediaQuery.sizeOf(context).height * 0.17,
                           width: MediaQuery.sizeOf(context).width * 0.28,
-                          decoration:  BoxDecoration(
+                          decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(color:isViewScreen == true ? whiteColor : fontController.textColor.value,width:3,style: BorderStyle.solid,strokeAlign: BorderSide.strokeAlignOutside),
+                            border: Border.all(
+                                color: fontController.isDefault.value == true
+                                    ? whiteColor
+                                    : fontController.textColor.value,
+                                width: 3,
+                                style: BorderStyle.solid,
+                                strokeAlign: BorderSide.strokeAlignOutside),
                             shape: BoxShape.circle,
                           ),
-                          child: Image(image: AssetImage(dummyPicture),fit: BoxFit.contain,isAntiAlias: true,),
+                          child: Image(
+                            image: AssetImage(dummyPicture),
+                            fit: BoxFit.contain,
+                            isAntiAlias: true,
+                          ),
                         ),
-                        const Sized(height: 0.02,),
+                        const Sized(
+                          height: 0.02,
+                        ),
                         Container(
                             padding: EdgeInsets.symmetric(horizontal: 15),
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                               color: whiteColor,
                             ),
-                            child: buildSectionTitle('Education'.toUpperCase(),'Barlow',isViewScreen == true ? false :true,buildSectionTitle: true)),
-                        buildEducationSection(context: context,education: education,styleSchoolLevel: _getTextStyle(13,'Poppins',false,false,FontWeight.bold),styleSchoolName:  _getTextStyle(11,'Poppins',false,false,FontWeight.bold),stylePtudyPeriod:  _getTextStyle(11,'Poppins',false,false)),
-                        const Sized(height: 0.04,),
+                            child: buildSectionTitle(title: 'Education'.toUpperCase(),color: fontController.isDefault.value == true
+                                ? greenColor
+                                : fontController.backgroundColor.value)),
+                        buildEducationSection(
+                            context: context,
+                            education: education,
+                            styleSchoolLevel: _getTextStyle(
+                               size:  13,color: fontController.isDefault.value == true
+                                ? whiteColor
+                                : fontController.textColor.value,weight:  FontWeight.bold),
+                            styleSchoolName: _getTextStyle(
+                               size:  11,color: fontController.isDefault.value == true
+                                ? whiteColor
+                                : fontController.textColor.value,weight:  FontWeight.bold),
+                            stylePtudyPeriod:
+                                _getTextStyle(size:  11,color: fontController.isDefault.value == true
+                                    ? whiteColor
+                                    : fontController.textColor.value)),
+                        const Sized(
+                          height: 0.04,
+                        ),
                         Container(
                             padding: EdgeInsets.symmetric(horizontal: 35),
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                               color: whiteColor,
                             ),
-                            child: buildSectionTitle('Skills'.toUpperCase(),'Barlow',isViewScreen == true ? false:true,buildSectionTitle: true)),
-                        buildSkillsSection(context: context,color:isViewScreen == true ? whiteColor: fontController.textColor.value,style: _getTextStyle(11,'Poppins',false,false), skills: skills),
-                        const Sized(height: 0.04,),
+                            child: buildSectionTitle(title: 'Skills'.toUpperCase(),color: fontController.isDefault.value == true
+                                ? greenColor
+                                : fontController.backgroundColor.value)),
+                        buildSkillsSection(
+                            context: context,
+                            color: fontController.isDefault.value == true
+                                ? whiteColor
+                                : fontController.textColor.value,
+                            style: _getTextStyle(size:  11,color: fontController.isDefault.value == true
+                                ? whiteColor
+                                : fontController.textColor.value),
+                            skills: skills),
+                        const Sized(
+                          height: 0.04,
+                        ),
                         Container(
                             padding: EdgeInsets.symmetric(horizontal: 6),
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                               color: whiteColor,
                             ),
-                            child: buildSectionTitle('Certificates'.toUpperCase(),'Barlow',isViewScreen == true ? false:true,buildSectionTitle: true)),
-                        buildCertificatedSection(context: context,color:isViewScreen == true ? whiteColor : fontController.textColor.value,style: _getTextStyle(11,'Poppins',false,false), certificated: certificated),
-                        const Sized(height: 0.03,),
+                            child: buildSectionTitle(
+                               title:  'Certificates'.toUpperCase(),
+                                color: fontController.isDefault.value == true
+                                    ? greenColor
+                                    : fontController.backgroundColor.value)),
+                        buildCertificatedSection(
+                            context: context,
+                            color: fontController.isDefault.value == true
+                                ? whiteColor
+                                : fontController.textColor.value,
+                            style: _getTextStyle(size:  11,color: fontController.isDefault.value == true
+                                ? whiteColor
+                                : fontController.textColor.value),
+                            certificated: certificated),
+                        const Sized(
+                          height: 0.03,
+                        ),
                       ],
                     ),
                   ),
@@ -112,53 +171,131 @@ class ModrenTempelatesSix extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Sized(height: 0.02,),
-                        buildPersonalInfo(context: context,userModel: userModel,fullNameStyle: _getTextStyle(20,'Poppins',true,false,FontWeight.bold,),currentPositionStyle: _getTextStyle(16,'Poppins',true,false,FontWeight.w700),color: isViewScreen == true ? greenColor : fontController.textColor.value ,userDataStyle: _getTextStyle(8,'Poppins',true)),
-                        const Sized(height: 0.02,),
+                        const Sized(
+                          height: 0.02,
+                        ),
+                        buildPersonalInfo(
+                            context: context,
+                            userModel: userModel,
+                            fullNameStyle: _getTextStyle(
+                             size:  20,
+                              color: fontController.isDefault.value == true
+                                  ? greenColor
+                                  : fontController.backgroundColor.value,
+                             weight:  FontWeight.bold,
+                            ),
+                            currentPositionStyle: _getTextStyle(
+                                size: 16,color: fontController.isDefault.value == true
+                                ? greenColor
+                                : fontController.backgroundColor.value,weight:  FontWeight.w700),
+                            color: fontController.isDefault.value == true
+                                ? greenColor
+                                : fontController.backgroundColor.value,
+                            userDataStyle: _getTextStyle(size: 8,color: fontController.isDefault.value == true
+                                ? greenColor
+                                : fontController.backgroundColor.value)),
+                        const Sized(
+                          height: 0.02,
+                        ),
                         if (userModel.bio != null)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                padding: EdgeInsets.symmetric(horizontal: MediaQuery.sizeOf(context).width * 0.16),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          MediaQuery.sizeOf(context).width *
+                                              0.16),
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
-                                    color: greenColor,
+                                    color: fontController.isDefault.value == true
+                                        ? greenColor
+                                        : fontController.backgroundColor.value,
                                   ),
-                                  child: buildSectionTitle('ABOUT ME'.toUpperCase(),'Poppins',false,buildSectionTitle: false)),
-                              const Sized(height: 0.01,),
+                                  child: buildSectionTitle(
+                                     title:  'Summary'.toUpperCase(),
+                                      color: whiteColor)),
+                              const Sized(
+                                height: 0.01,
+                              ),
                               SizedBox(
                                 width: MediaQuery.sizeOf(context).width * 0.55,
                                 child: Text(
                                   userModel.bio!,
-                                  style: _getTextStyle(10,'Poppins',true),
+                                  style: _getTextStyle(size: 10,color: fontController.isDefault.value == true
+                                      ? greenColor
+                                      : fontController.backgroundColor.value),
                                   softWrap: true,
-                                  overflow: TextOverflow.visible, // Allow all content to be visible
+                                  overflow: TextOverflow.visible,
                                   maxLines: 10,
                                 ),
                               ),
                             ],
                           ),
-                        const Sized(height: 0.02,),
+                        const Sized(
+                          height: 0.02,
+                        ),
                         Container(
-                            padding: EdgeInsets.symmetric(horizontal: MediaQuery.sizeOf(context).width * 0.13),
+                            padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    MediaQuery.sizeOf(context).width * 0.13),
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              color: greenColor,
+                              color: fontController.isDefault.value == true
+                                  ? greenColor
+                                  : fontController.backgroundColor.value,
                             ),
-                            child: buildSectionTitle('Experience'.toUpperCase(),'Poppins',false,buildSectionTitle: false)),
-                        const Sized(height: 0.01,),
-                        buildExperienceSection(context: context,experienceTitle: _getTextStyle(12,'Poppins',true,false,FontWeight.bold),experiencePeriod: _getTextStyle(8,'Poppins',true,false,FontWeight.w500),experiencePlace: _getTextStyle(12,'Poppins',true,false,FontWeight.bold),description: _getTextStyle(10,'Poppins',true),experienceList: experienceList,),
-                        const Sized(height: 0.02,),
+                            child: buildSectionTitle(
+                              title:   'Experience'.toUpperCase(),color: whiteColor)),
+                        const Sized(
+                          height: 0.01,
+                        ),
+                        buildExperienceSection(
+                          context: context,
+                          experienceTitle: _getTextStyle(
+                             size:  12,color: fontController.isDefault.value == true
+                              ? greenColor
+                              : fontController.backgroundColor.value,weight:  FontWeight.bold),
+                          experiencePeriod: _getTextStyle(
+                             size:  8,color: fontController.isDefault.value == true
+                              ? greenColor
+                              : fontController.backgroundColor.value,weight:  FontWeight.w500),
+                          experiencePlace: _getTextStyle(
+                             size:  12,color: fontController.isDefault.value == true
+                              ? greenColor
+                              : fontController.backgroundColor.value,weight:  FontWeight.bold),
+                          description: _getTextStyle(size: 10,color: fontController.isDefault.value == true
+                              ? greenColor
+                              : fontController.backgroundColor.value),
+                          experienceList: experienceList,
+                        ),
+                        const Sized(
+                          height: 0.02,
+                        ),
                         Container(
-                            padding: EdgeInsets.symmetric(horizontal: MediaQuery.sizeOf(context).width * 0.13),
+                            padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    MediaQuery.sizeOf(context).width * 0.13),
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              color: greenColor,
+                              color: fontController.isDefault.value == true
+                                  ? greenColor
+                                  : fontController.backgroundColor.value,
                             ),
-                            child: buildSectionTitle('Languages'.toUpperCase(),'Poppins',false,buildSectionTitle: false)),
-                        const Sized(height: 0.01,),
-                        buildLanguageSection(context: context,color: isViewScreen == true ? greenColor:fontController.textColor.value,style: _getTextStyle(11,'Poppins',true), language: language),
+                            child: buildSectionTitle(
+                               title:  'Languages'.toUpperCase(),color: whiteColor)),
+                        const Sized(
+                          height: 0.01,
+                        ),
+                        buildLanguageSection(
+                            context: context,
+                            color: fontController.isDefault.value == true
+                                ? greenColor
+                                : fontController.backgroundColor.value,
+                            style: _getTextStyle(size: 11, color: fontController.isDefault.value == true
+                                ? greenColor
+                                : fontController.backgroundColor.value),
+                            language: language),
                       ],
                     ),
                   ),
@@ -170,17 +307,26 @@ class ModrenTempelatesSix extends StatelessWidget {
       ),
     );
   }
-  TextStyle _getTextStyle(double size,String fontFamily,bool isSide,[bool buildSectionTitle = false,FontWeight weight = FontWeight.normal,]) {
+
+  /// Generates text styles dynamically
+  TextStyle _getTextStyle(
+      {required double size,
+      FontWeight weight = FontWeight.normal,
+      required Color color}) {
     return GoogleFonts.getFont(
-      isViewScreen == true ? fontFamily :fontController.selectedFont.value,
+      decorationThickness: 3.0,
+      fontController.selectedFont.value,
       fontSize: size,
       fontWeight: weight,
-      color: isSide == true ? greenColor : isViewScreen == true ? buildSectionTitle == true ? greenColor : whiteColor : fontController.textColor.value,
+      color: color,
     );
   }
 
-  Widget buildSectionTitle(String title,String fontFamily,bool isSide,{bool buildSectionTitle = false}) {
-    return Text(title, style: _getTextStyle(18,fontFamily,isSide,buildSectionTitle,FontWeight.bold,));
+  /// Section Title Widget with optional color parameter
+  Widget buildSectionTitle({required String title, required Color color}) {
+    return Text(
+      title,
+      style: _getTextStyle(size: 18, weight: FontWeight.bold, color: color),
+    );
   }
 }
-

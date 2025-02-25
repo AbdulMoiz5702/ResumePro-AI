@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../controller/CoverLetterController.dart';
 import '../../conts/colors.dart';
 import '../../widgets/custom_sizedBox.dart';
@@ -17,12 +16,13 @@ class CoverLetterScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("AI Cover Letter"),
+        title: mediumText(title: 'AI Cover Letter',color: whiteColor),
         centerTitle: true,
         backgroundColor: Colors.black,
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
+        physics: BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -62,18 +62,16 @@ class CoverLetterScreen extends StatelessWidget {
             ),
             const Sized(height: 0.05,),
             Obx(() => controller.coverLetter.value.isNotEmpty
-                ? Expanded(
-              child: SingleChildScrollView(
-                child: Container(
-                  padding: EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(8),
+                ? SingleChildScrollView(
+                  child: Container(
+                    padding: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(controller.coverLetter.value,style: TextStyle(fontWeight: FontWeight.w400,color: whiteColor),),
                   ),
-                  child: Text(controller.coverLetter.value,style: TextStyle(fontWeight: FontWeight.w400,color: whiteColor),),
-                ),
-              ),
-            )
+                )
                 : Container()),
             Sized(height: 0.02,),
             Row(
