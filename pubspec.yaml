@@ -49,6 +49,7 @@ dependencies:
   file_picker:
   permission_handler:
   flutter_expandable_fab:
+  image_picker:
 
 dev_dependencies:
   flutter_test:

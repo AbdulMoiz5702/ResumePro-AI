@@ -18,6 +18,7 @@ import '../../models/skills_model.dart';
 import '../../models/user_model.dart';
 import '../../widgets/customDivider.dart';
 import '../../widgets/custom_sizedBox.dart';
+import '../../widgets/profile_image_picker.dart';
 
 class ModrenTempelatesTwo extends StatelessWidget {
   final List<ExperienceData>? experienceList;
@@ -52,25 +53,11 @@ class ModrenTempelatesTwo extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      margin: EdgeInsets.only(left: 5),
-                      clipBehavior: Clip.hardEdge,
-                      height: MediaQuery.sizeOf(context).height * 0.17,
-                      width: MediaQuery.sizeOf(context).width * 0.28,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                            color: fontController.isDefault.value == true ? Color(0xff6c9ac3) :fontController.textColor.value ,
-                            width: 3,
-                            style: BorderStyle.solid,
-                            strokeAlign: BorderSide.strokeAlignOutside),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Image(
-                        image: AssetImage(dummyPicture),
-                        fit: BoxFit.contain,
-                        isAntiAlias: true,
-                      ),
+                    ProfileImagePicker(
+                      height: MediaQuery.of(context).size.height * 0.17,
+                      width: MediaQuery.of(context).size.width * 0.28,
+                      defaultImage: dummyPicture,
+                      borderColor: fontController.isDefault.value == true ? Color(0xff6c9ac3) :fontController.textColor.value, // Can be dynamic
                     ),
                     Sized(
                       width: 0.01,

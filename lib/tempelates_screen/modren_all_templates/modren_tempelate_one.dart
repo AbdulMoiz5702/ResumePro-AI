@@ -9,6 +9,7 @@ import '../../Uitlites/skills_widget.dart';
 import '../../Uitlites/study_widget.dart';
 import '../../Uitlites/user_info_widget.dart';
 import '../../controller/cv_controller.dart';
+import '../../conts/tempelates.dart';
 import '../../models/certificated.dart';
 import '../../models/eduaction_model.dart';
 import '../../models/exprience_model.dart';
@@ -17,6 +18,7 @@ import '../../models/skills_model.dart';
 import '../../models/user_model.dart';
 import '../../widgets/customDivider.dart';
 import '../../widgets/custom_sizedBox.dart';
+import '../../widgets/profile_image_picker.dart';
 
 class ModrenTempelateOne extends StatelessWidget {
   final List<ExperienceData>? experienceList;
@@ -51,13 +53,11 @@ class ModrenTempelateOne extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      height: MediaQuery.sizeOf(context).height * 0.17,
-                      width: MediaQuery.sizeOf(context).width * 0.28,
-                      decoration:  BoxDecoration(
-                        color: fontController.isDefault.value == true ? blackColor :fontController.textColor.value,
-                        shape: BoxShape.circle,
-                      ),
+                    ProfileImagePicker(
+                      height: MediaQuery.of(context).size.height * 0.17,
+                      width: MediaQuery.of(context).size.width * 0.28,
+                      defaultImage: dummyPicture,
+                      borderColor: fontController.isDefault.value == true ? blackColor :fontController.textColor.value, // Can be dynamic
                     ),
                     buildPersonalInfo(context: context,userModel: userModel,fullNameStyle: _getTextStyle(size: 20,weight: FontWeight.bold,color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value ),currentPositionStyle: _getTextStyle(size: 16,weight:  FontWeight.w700,color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value),color: fontController.isDefault.value == true ? blackColor :fontController.textColor.value,userDataStyle: _getTextStyle(size:  12,color:fontController.isDefault.value == true ? blackColor :fontController.textColor.value,),),
                   ],
